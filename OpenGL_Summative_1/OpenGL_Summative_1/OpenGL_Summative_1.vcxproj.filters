@@ -79,6 +79,15 @@
     <Filter Include="Framework\Debug">
       <UniqueIdentifier>{74918b90-989e-41d3-8787-2afa7efda493}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\Mesh">
+      <UniqueIdentifier>{11b0cf9f-a103-457b-8029-a988fcc61ac8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Mesh\CubeMesh">
+      <UniqueIdentifier>{299bb6f0-5155-4ff4-bb5f-96b46af8ed86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Shaders\Unlit">
+      <UniqueIdentifier>{8a44ed77-a87a-4f37-8bd4-aca9406899d1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Engine\Commenting Header.txt">
@@ -146,6 +155,12 @@
     <ClInclude Include="Game\SpaceShip.h">
       <Filter>Game\SpaceShip</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Mesh.h">
+      <Filter>Framework\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\CubeMesh.h">
+      <Filter>Framework\Mesh\CubeMesh</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Camera.cpp">
@@ -205,6 +220,9 @@
     <ClCompile Include="Game\SpaceShip.cpp">
       <Filter>Game\SpaceShip</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\CubeMesh.cpp">
+      <Filter>Framework\Mesh\CubeMesh</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Engine\Shaders\CubeMap.fs">
@@ -224,6 +242,12 @@
     </None>
     <None Include="Engine\Shaders\Text.vs">
       <Filter>Resources\Shaders\Text</Filter>
+    </None>
+    <None Include="Engine\Shaders\Unlit.vs">
+      <Filter>Resources\Shaders\Unlit</Filter>
+    </None>
+    <None Include="Engine\Shaders\Unlit.fs">
+      <Filter>Resources\Shaders\Unlit</Filter>
     </None>
   </ItemGroup>
 </Project>

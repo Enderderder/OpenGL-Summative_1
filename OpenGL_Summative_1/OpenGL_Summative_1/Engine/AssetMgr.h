@@ -5,6 +5,7 @@
 
 // Forward Declare
 class CSprite;
+class CMesh;
 
 
 class CAssetMgr
@@ -34,6 +35,7 @@ public:
 
 	CSprite* GetSprite(std::string _name) const;
 	GLuint GetProgramID(std::string _name) const;
+	CMesh* GetMesh(std::string _name) const;
 
 
 private:
@@ -42,13 +44,20 @@ private:
 
 	void CreateSprite(std::string _name, const char* _pathName);
 
+	void CreateMesh(std::string _name, CMesh* _mesh);
+
 
 private:
 	/** Map collection of sprites with a string name */
 	std::map<std::string, CSprite*> m_spriteMap;
 
+	/** Map collection of meshes */
+	std::map<std::string, CMesh*> m_meshMap;
+
 	/** Map collection of programs with a string name */
 	std::map<std::string, GLuint> m_programMap;
+
+
 
 };
 

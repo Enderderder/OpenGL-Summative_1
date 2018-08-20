@@ -5,7 +5,10 @@
 // Engine Include
 #include "ShaderLoader.h"
 #include "Sprite.h"
+#include "CubeMesh.h"
 #include "Debug.h"
+
+#pragma region Singleton
 
 // Static Variable
 CAssetMgr* CAssetMgr::s_pAssetMgr = nullptr;
@@ -29,10 +32,16 @@ void CAssetMgr::DestroyInstance()
 CAssetMgr::CAssetMgr() {}
 CAssetMgr::~CAssetMgr() {}
 
+#pragma endregion Singleton
+
 void CAssetMgr::InitializeAssets()
 {
 	/** Initialize Programs */
 	CreateProgram("DefaultSpriteProgram", "Engine/Shaders/Sprite.vs", "Engine/Shaders/Sprite.fs");
+	CreateProgram("UnlitProgram", "Engine/Shaders/Unlit.vs", "Engine/Shaders/Unlit.vs");
+
+	/** Initialize Meshes */
+	CreateMesh("DefaultCubeMesh", new CCubeMesh());
 
 	/** Initialize Sprites */
 	CreateSprite("Block", "Resources/Sprites/Block.png");
@@ -66,6 +75,20 @@ GLuint CAssetMgr::GetProgramID(std::string _name) const
 	return NULL;
 }
 
+CMesh* CAssetMgr::GetMesh(std::string _name) const
+{
+	for (auto iter = m_meshMap.begin(); iter != m_meshMap.end(); ++iter)
+	{
+		if (iter->first == _name)
+		{
+			return iter->second;
+		}
+	}
+
+	CDebug::Log("Unable to grab mesh from name.");
+	return nullptr;
+}
+
 void CAssetMgr::CreateProgram(std::string _name, const char* _vertexPath, const char* _fragmentPath)
 {
 	GLuint newProgram = ShaderLoader::CreateProgram(_vertexPath, _fragmentPath);
@@ -79,4 +102,9 @@ void CAssetMgr::CreateSprite(std::string _name, const char* _pathName)
 	newSprite->CreateSprite(_pathName);
 
 	m_spriteMap.insert(std::pair<std::string, CSprite*>(_name, newSprite));
+}
+
+void CAssetMgr::CreateMesh(std::string _name, CMesh* _mesh)
+{
+	m_meshMap.insert(std::pair<std::string, CMesh*>(_name, _mesh));
 }
