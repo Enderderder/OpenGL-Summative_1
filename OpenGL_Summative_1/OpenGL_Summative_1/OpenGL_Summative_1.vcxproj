@@ -25,6 +25,7 @@
     <ClInclude Include="Engine\AssetMgr.h" />
     <ClInclude Include="Engine\Camera.h" />
     <ClInclude Include="Engine\Component.h" />
+    <ClInclude Include="Engine\CubeMap.h" />
     <ClInclude Include="Engine\CubeMesh.h" />
     <ClInclude Include="Engine\Debug.h" />
     <ClInclude Include="Engine\GameObject.h" />
@@ -41,6 +42,7 @@
     <ClInclude Include="Engine\TextLoader.h" />
     <ClInclude Include="Engine\Time.h" />
     <ClInclude Include="Engine\Utility.h" />
+    <ClInclude Include="Game\Cube.h" />
     <ClInclude Include="Game\GameClasses.h" />
     <ClInclude Include="Game\SpaceShip.h" />
     <ClInclude Include="Game\TestScene.h" />
@@ -49,6 +51,7 @@
     <ClCompile Include="Engine\AssetMgr.cpp" />
     <ClCompile Include="Engine\Camera.cpp" />
     <ClCompile Include="Engine\Component.cpp" />
+    <ClCompile Include="Engine\CubeMap.cpp" />
     <ClCompile Include="Engine\CubeMesh.cpp" />
     <ClCompile Include="Engine\Debug.cpp" />
     <ClCompile Include="Engine\GameObject.cpp" />
@@ -64,10 +67,13 @@
     <ClCompile Include="Engine\TextLabel.cpp" />
     <ClCompile Include="Engine\TextLoader.cpp" />
     <ClCompile Include="Engine\Time.cpp" />
+    <ClCompile Include="Game\Cube.cpp" />
     <ClCompile Include="Game\SpaceShip.cpp" />
     <ClCompile Include="Game\TestScene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Engine\Shaders\BlinnPhong.fs" />
+    <None Include="Engine\Shaders\BlinnPhong.vs" />
     <None Include="Engine\Shaders\CubeMap.fs" />
     <None Include="Engine\Shaders\CubeMap.vs" />
     <None Include="Engine\Shaders\Sprite.fs" />

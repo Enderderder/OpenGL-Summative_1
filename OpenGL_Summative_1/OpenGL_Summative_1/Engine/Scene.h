@@ -36,6 +36,10 @@ public:
 
 	std::string sceneName;
 
+	/** Configuration */
+
+	bool m_bScissorTest;
+
 protected:
 	
 	CCamera* m_MainCamera;
@@ -45,6 +49,7 @@ protected:
 	std::vector<CGameObject*> m_vGameObj;
 
 private:
+
 
 
 };

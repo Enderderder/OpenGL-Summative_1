@@ -2,13 +2,8 @@
 #include "Utility.h"
 #include "SceneMgr.h"
 #include "Time.h"
-//#include "SinglePlayerScene.h"
-//#include "MeshMgr.h"
-//#include "ModelMgr.h"
 #include "AssetMgr.h"
 #include "SceneMgr.h"
-//#include "CNetworkMgr.h"
-//#include "network.h"
 #include "Input.h"
 #include "TextLabel.h"
 
@@ -16,6 +11,7 @@
 static CTime* p_Time = CTime::GetInstance();
 static CSceneMgr* p_SceneMgr = CSceneMgr::GetInstance();
 static CAssetMgr* p_Asset = CAssetMgr::GetInstance();
+static CInput* p_Input = CInput::GetInstance();
 
 void InititializeProgram();
 void Render();
@@ -67,9 +63,9 @@ void InititializeProgram()
 	p_Time->Initialize();
 	p_Asset->InitializeAssets();
 	p_SceneMgr->InitializeScenes();
+	p_Input->InitializeInput();
 
 	//m_pSound.PlaySound();
-	//cInputMgr->InitializeInput();
 	//CAssetMgr::GetInstance()->InitializeAssets();
 	//CMeshMgr::GetInstance()->InitializeMeshes();
 	//CModelMgr::GetInstance()->InitializeModels();

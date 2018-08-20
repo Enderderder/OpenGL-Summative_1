@@ -36,6 +36,8 @@ public:
 	CSprite* GetSprite(std::string _name) const;
 	GLuint GetProgramID(std::string _name) const;
 	CMesh* GetMesh(std::string _name) const;
+	GLuint GetTexture(std::string _name) const;
+
 
 
 private:
@@ -45,6 +47,8 @@ private:
 	void CreateSprite(std::string _name, const char* _pathName);
 
 	void CreateMesh(std::string _name, CMesh* _mesh);
+
+	void CreateTexture(std::string _name, const char* _pathName);
 
 
 private:
@@ -57,7 +61,8 @@ private:
 	/** Map collection of programs with a string name */
 	std::map<std::string, GLuint> m_programMap;
 
-
+	/** Map collection of textures with a strin name */
+	std::map<std::string, GLuint> m_textureMap;
 
 };
 

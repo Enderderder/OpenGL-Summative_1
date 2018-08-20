@@ -88,6 +88,18 @@
     <Filter Include="Resources\Shaders\Unlit">
       <UniqueIdentifier>{8a44ed77-a87a-4f37-8bd4-aca9406899d1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\BasicShapes">
+      <UniqueIdentifier>{0f993999-7307-4c29-8cc8-8b05e43d73c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\BasicShapes\3D Cube">
+      <UniqueIdentifier>{23eb83f9-4589-4bf9-ad73-c5b43e83c860}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Shaders\BlinnPhong">
+      <UniqueIdentifier>{5e5b9598-0a97-4890-b25e-6887063d92d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\CubeMap">
+      <UniqueIdentifier>{7c8ee095-959f-43d3-87de-92c0cbaa877c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Engine\Commenting Header.txt">
@@ -161,6 +173,12 @@
     <ClInclude Include="Engine\CubeMesh.h">
       <Filter>Framework\Mesh\CubeMesh</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Cube.h">
+      <Filter>Game\BasicShapes\3D Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\CubeMap.h">
+      <Filter>Framework\CubeMap</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Camera.cpp">
@@ -223,6 +241,12 @@
     <ClCompile Include="Engine\CubeMesh.cpp">
       <Filter>Framework\Mesh\CubeMesh</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Cube.cpp">
+      <Filter>Game\BasicShapes\3D Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\CubeMap.cpp">
+      <Filter>Framework\CubeMap</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Engine\Shaders\CubeMap.fs">
@@ -248,6 +272,12 @@
     </None>
     <None Include="Engine\Shaders\Unlit.fs">
       <Filter>Resources\Shaders\Unlit</Filter>
+    </None>
+    <None Include="Engine\Shaders\BlinnPhong.fs">
+      <Filter>Resources\Shaders\BlinnPhong</Filter>
+    </None>
+    <None Include="Engine\Shaders\BlinnPhong.vs">
+      <Filter>Resources\Shaders\BlinnPhong</Filter>
     </None>
   </ItemGroup>
 </Project>

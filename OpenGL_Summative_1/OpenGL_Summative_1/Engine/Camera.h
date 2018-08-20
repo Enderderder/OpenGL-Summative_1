@@ -1,41 +1,23 @@
-//
-// Bachelor of Software Engineering
-// Media Design School
-// Auckland
-// New Zealand
-//
-// (c) 2018 Media Design School
-//
-// File Name    : Camera.h
-// Description	: 
-// Author       : Richard Wulansari & Jacob Dewse
-// Mail         : richard.wul7481@mediadesign.school.nz, jacob.dew7364@mediadesign.school.nz
-//
-
 #ifndef CAMERA_H
 #define CAMERA_H
 
-// Local Include
-#include "Utility.h"
+// Inherited Include
+#include "GameObject.h"
 
-class CCamera
+class CCamera : public CGameObject
 {
 public:
 	CCamera();
 	~CCamera();
 
-	CCamera(glm::vec3 _Positition, glm::vec3 _Facing, glm::vec3 _Normal);
-	void UpdateCamera();
+	virtual void InitializeObject() override;
+	virtual void Update() override;
 
 	glm::mat4 GetView() const;
 	void CalcViewMatrix();
 
 	glm::mat4 GetProj() const;
 	void SetProjectionMatrix();
-	void SetProjectionMatrix(float _fov);
-
-	glm::vec3 GetCameraPosition() const;
-	void SetCameraPosition(glm::vec3 _Position);
 
 	glm::vec3 GetCameraFacing() const;
 	void SetCameraFacing(glm::vec3 _Facing);
@@ -43,8 +25,19 @@ public:
 	glm::vec3 GetCameraNormal() const;
 	void SetCameraNormal(glm::vec3 _Normal);
 
-private:
-	glm::vec3 m_CameraPosition;
+
+public: /** Configuration for the camera */
+
+	bool m_bPerspective;
+	float m_fov;
+	float m_nearPlane;
+	float m_farPlane;
+
+	bool m_bIsControlling;
+
+
+private: /** Member variables */
+
 	glm::vec3 m_CameraFacing;
 	glm::vec3 m_CameraNormal;
 

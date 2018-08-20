@@ -1,8 +1,5 @@
 #pragma once
 
-// Global Include
-#include "Utility.h"
-
 // Derive Include
 #include "Component.h"
 
@@ -18,6 +15,7 @@ public:
 
 	void SetMesh(CMesh* _mesh);
 	void SetTexture(GLuint _texture);
+	void SetProgram(GLuint _program);
 
 	void RenderMesh(CCamera* _camera);
 
@@ -25,6 +23,7 @@ private:
 
 	CMesh * m_mesh;
 	GLuint m_texture;
+	GLuint m_program;
 
 };
 

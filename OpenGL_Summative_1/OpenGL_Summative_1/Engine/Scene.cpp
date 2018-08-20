@@ -1,9 +1,12 @@
 // This Include
 #include "Scene.h"
 
-// Local Include
+// Engine Include
 #include "GameObject.h"
 #include "SpriteRenderComponent.h"
+#include "MeshComponent.h"
+
+#include "Debug.h"
 //#include "Player.h"
 //#include "PowerUps.h"
 //#include "AssetMgr.h"
@@ -56,6 +59,14 @@ void CScene::BeginPlay()
 
 void CScene::RenderScene()
 {
+	if (m_bScissorTest)
+	{
+		glEnable(GL_SCISSOR_TEST);
+		glScissor(0, 100, 1366, 668);
+	}
+
+	glPolygonMode(GL_FRONT, GL_LINE);
+
 	//m_cCubeMap->Render(m_MainCamera);
 
 	if (!m_vGameObj.empty())
@@ -66,15 +77,21 @@ void CScene::RenderScene()
 				= gameObject->GetComponent<CSpriteRenderComponent>();
 			if (spriteRenderer)
 			{
-				//std::cout << "rendering sprite" << std::endl;
 				spriteRenderer->Render(m_MainCamera);
 				continue;
 			}
 
-			//else if (gameObject->GetComponent<CSpriteRenderComponent>())
+			CMeshComponent* meshRenderer = gameObject->GetComponent<CMeshComponent>();
+			if (meshRenderer)
+			{
+				meshRenderer->RenderMesh(m_MainCamera);
+				continue;
+			}
 		}
 	}
-	
+
+	glDisable(GL_SCISSOR_TEST);
+	glPolygonMode(GL_FRONT, GL_FILL);
 }
 
 void CScene::ResetScene()

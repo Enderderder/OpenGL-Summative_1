@@ -13,7 +13,6 @@ public:
 	CSpaceShip();
 	~CSpaceShip();
 
-
 	virtual void InitializeObject() override;
 	virtual void Update() override;
 

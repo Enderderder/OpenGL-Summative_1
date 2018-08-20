@@ -1,5 +1,8 @@
 #pragma once
 
+// Global Include
+#include "Utility.h"
+
 // Forward Declare
 class CGameObject;
 
