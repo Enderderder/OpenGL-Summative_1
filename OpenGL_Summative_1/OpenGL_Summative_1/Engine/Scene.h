@@ -15,10 +15,9 @@ class CScene
 public:
 	CScene();
 	~CScene();
-
 	virtual void InitailizeScene();
 	void BeginPlay();
-	void UpdateScene();
+	virtual void UpdateScene();
 	void RenderScene();
 	void ResetScene();
 
@@ -39,12 +38,14 @@ public:
 	/** Configuration */
 
 	bool m_bScissorTest;
+	bool m_bStencilTest;
+	bool m_bPolygonTest;
 
 protected:
 	
 	CCamera* m_MainCamera;
 
-	CCubeMap * m_cCubeMap;
+	CCubeMap * m_CubeMap;
 
 	std::vector<CGameObject*> m_vGameObj;
 

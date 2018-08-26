@@ -44,7 +44,7 @@ void CSceneMgr::InitializeScenes()
 
 void CSceneMgr::RenderCurrentScene()
 {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 	m_runningScene->RenderScene();
 }
@@ -63,16 +63,17 @@ void CSceneMgr::CreateNewScene(std::string _name, CScene* _scene)
 
 void CSceneMgr::LoadScene(std::string _name)
 {
-	// Reset the current scene
-	m_runningScene->ResetScene();
-
 	// Jump to another scene and initialise 
 	for (auto iter = m_scenes.begin(); iter != m_scenes.end(); ++iter)
 	{
 		if (iter->first == _name)
 		{
+			// Reset the current scene
+			m_runningScene->ResetScene();
+
 			m_runningScene = iter->second;
 			m_runningScene->InitailizeScene();
+			m_runningScene->BeginPlay();
 		}
 	}
 }

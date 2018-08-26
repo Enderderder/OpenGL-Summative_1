@@ -17,8 +17,9 @@ public:
 
 private:
 	
-	CMesh* m_cubemapMesh;
+	GLuint m_programID;
 	GLuint m_texture;
+	CMesh* m_cubemapMesh;
 
 };
 

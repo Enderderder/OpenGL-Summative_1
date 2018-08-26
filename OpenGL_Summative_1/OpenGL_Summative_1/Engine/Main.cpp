@@ -30,8 +30,8 @@ int main(int argc, char **argv)
 	glutInitWindowSize(util::SCR_WIDTH, util::SCR_HEIGHT);
 	glutCreateWindow("Velocitas");
 	glEnable(GL_MULTISAMPLE);
-	//glEnable(GL_BLEND);
-	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	// Set Clear Screen Color
 	glClearColor(0.0, 1.0, 0.0, 1.0); // Make the background color GREEN
@@ -46,8 +46,10 @@ int main(int argc, char **argv)
 	glutDisplayFunc(Render);
 
 	glutCloseFunc([]() {
-		//cInputMgr->DestroyInstance();
-		//cSceneMgr->DestroyInstance();
+		//p_Time->DestroyInstance();
+		//p_Input->DestroyInstance();
+		//p_SceneMgr->DestroyInstance();
+		//p_Asset->DestroyInstance();
 		//cNetworkMgr->DestroyInstance();
 		//CAssetMgr::GetInstance()->DestroyInstance();
 		//CMeshMgr::GetInstance()->DestroyInstance();

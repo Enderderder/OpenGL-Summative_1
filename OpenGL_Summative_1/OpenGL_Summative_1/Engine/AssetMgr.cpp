@@ -6,6 +6,7 @@
 #include "ShaderLoader.h"
 #include "Sprite.h"
 #include "CubeMesh.h"
+#include "CubemapMesh.h"
 #include "Debug.h"
 
 #pragma region Singleton
@@ -40,15 +41,29 @@ void CAssetMgr::InitializeAssets()
 	CreateProgram("DefaultSpriteProgram", "Engine/Shaders/Sprite.vs", "Engine/Shaders/Sprite.fs");
 	CreateProgram("UnlitProgram", "Engine/Shaders/Unlit.vs", "Engine/Shaders/Unlit.fs");
 	CreateProgram("BlinnPhongProgram", "Engine/Shaders/BlinnPhong.vs", "Engine/Shaders/BlinnPhong.fs");
+	CreateProgram("CubemapProgram", "Engine/Shaders/CubeMap.vs", "Engine/Shaders/CubeMap.fs");
 
 	/** Initialize Meshes */
 	CreateMesh("DefaultCubeMesh", new CCubeMesh());
+	CreateMesh("DefaultCubemapMesh", new CCubemapMesh());
 
 	/** Initialize Textures */
 	CreateTexture("Box", "Resources/Textures/Box.png");
+	CreateTexture("Block", "Resources/Sprites/Block.png");
 
 	/** Initialize Sprites */
 	CreateSprite("Block", "Resources/Sprites/Block.png");
+
+	/** initialize Cubemaps */
+	std::vector<std::string> GameCubeMapPaths = {
+		"right.jpg",
+		"left.jpg",
+		"top.jpg",
+		"bottom.jpg",
+		"back.jpg",
+		"front.jpg"
+	};
+	CreateCubemapTexture("DefaultCubeMapTexture", GameCubeMapPaths);
 }
 
 CSprite* CAssetMgr::GetSprite(std::string _name) const
@@ -104,6 +119,20 @@ GLuint CAssetMgr::GetTexture(std::string _name) const
 	}
 
 	CDebug::Log("Unable to grab texture from name.");
+	return NULL;
+}
+
+GLuint CAssetMgr::GetCubemapTexture(std::string _name) const
+{
+	for (auto iter = m_cubemapTextureMap.begin(); iter != m_cubemapTextureMap.end(); ++iter)
+	{
+		if (iter->first == _name)
+		{
+			return iter->second;
+		}
+	}
+
+	CDebug::Log("Unable to grab cubemap texture from name.");
 	return NULL;
 }
 
@@ -165,4 +194,44 @@ void CAssetMgr::CreateTexture(std::string _name, const char* _pathName)
 
 	/** Load into the map */
 	m_textureMap.insert(std::pair<std::string, GLuint>(_name, texture));
+}
+
+void CAssetMgr::CreateCubemapTexture(std::string _name, std::vector<std::string> _textureNames)
+{
+	GLuint texture;
+
+	// Bind each image into the cube map
+	glGenTextures(1, &texture);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, texture);
+
+	int width, height;
+	unsigned char* image;
+	for (GLuint i = 0; i < 6; ++i)
+	{
+		std::string fullPathName = "Resources/Textures/CubeMap/";
+		fullPathName.append(_textureNames[i]);
+
+		image = SOIL_load_image(fullPathName.c_str(),
+			&width, &height, 0, SOIL_LOAD_RGB);
+		glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB,
+			width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+		SOIL_free_image_data(image);
+	}
+
+	// Set texture parameters
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+	glGenerateMipmap(GL_TEXTURE_CUBE_MAP);
+
+	// Free memory and unbind the texture type
+	glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+
+	/************************************************************************/
+
+	/** Load into the map */
+	m_cubemapTextureMap.insert(std::pair<std::string, GLuint>(_name, texture));
+
 }

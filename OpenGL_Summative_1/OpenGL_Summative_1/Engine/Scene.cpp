@@ -5,6 +5,8 @@
 #include "GameObject.h"
 #include "SpriteRenderComponent.h"
 #include "MeshComponent.h"
+#include "CubeMap.h"
+#include "AssetMgr.h"
 
 #include "Debug.h"
 //#include "Player.h"
@@ -21,9 +23,8 @@
 
 CScene::CScene()
 {
-
 	m_MainCamera = nullptr;
-	m_cCubeMap = nullptr;
+	m_CubeMap = nullptr;
 }
 
 // CScene::CScene(ESCENES _eSceneNum)
@@ -35,7 +36,7 @@ CScene::~CScene()
 	// Clean up the memory allocated variables inside the class
 	// ========================================================
 	delete m_MainCamera;
-	m_cCubeMap = nullptr;
+	m_CubeMap = nullptr;
 
 	for (auto obj : m_vGameObj)
 	{
@@ -62,15 +63,29 @@ void CScene::RenderScene()
 	if (m_bScissorTest)
 	{
 		glEnable(GL_SCISSOR_TEST);
-		glScissor(0, 100, 1366, 668);
+		glScissor(0, 100, 1366, 568);
 	}
 
-	glPolygonMode(GL_FRONT, GL_LINE);
+	if (m_bPolygonTest)
+	{
+		glPolygonMode(GL_FRONT, GL_LINE);
+	}
 
-	//m_cCubeMap->Render(m_MainCamera);
+	if (m_CubeMap != nullptr)
+	{
+		m_CubeMap->RenderCubeMap(m_MainCamera);
+	}
+
+
 
 	if (!m_vGameObj.empty())
 	{
+		glEnable(GL_STENCIL_TEST);
+		glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+
+		glStencilFunc(GL_ALWAYS, 1, 0xFF);
+		glStencilMask(0xFF);
+
 		for (CGameObject* gameObject : m_vGameObj)
 		{
 			CSpriteRenderComponent* spriteRenderer
@@ -88,7 +103,30 @@ void CScene::RenderScene()
 				continue;
 			}
 		}
+
+		glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+		glStencilMask(0x00);
+
+		for (CGameObject* gameObject : m_vGameObj)
+		{
+			CMeshComponent* meshRenderer = gameObject->GetComponent<CMeshComponent>();
+			if (meshRenderer)
+			{
+				gameObject->m_transform.scale = glm::vec3(1.1f, 1.1f, 1.1f);
+				meshRenderer->SetTexture(CAssetMgr::GetInstance()->GetTexture("Block"));
+
+				meshRenderer->RenderMesh(m_MainCamera);
+
+				gameObject->m_transform.scale = glm::vec3(1.0f, 1.0f, 1.0f);
+				meshRenderer->SetTexture(CAssetMgr::GetInstance()->GetTexture("Box"));
+				continue;
+			}
+		}
 	}
+
+	glStencilMask(0x7F);
+
+	glDisable(GL_STENCIL_TEST);
 
 	glDisable(GL_SCISSOR_TEST);
 	glPolygonMode(GL_FRONT, GL_FILL);

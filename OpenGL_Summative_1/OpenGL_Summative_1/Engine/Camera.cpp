@@ -13,7 +13,7 @@ CCamera::CCamera() :
 	m_bPerspective(true),
 	m_fov(45.0f),
 	m_nearPlane(0.1f),
-	m_farPlane(1000.0f),
+	m_farPlane(3000.0f),
 	m_bIsControlling(false)
 {}
 

@@ -37,7 +37,7 @@ public:
 	GLuint GetProgramID(std::string _name) const;
 	CMesh* GetMesh(std::string _name) const;
 	GLuint GetTexture(std::string _name) const;
-
+	GLuint GetCubemapTexture(std::string _name) const;
 
 
 private:
@@ -50,6 +50,7 @@ private:
 
 	void CreateTexture(std::string _name, const char* _pathName);
 
+	void CreateCubemapTexture(std::string _name, std::vector<std::string> _textureNames);
 
 private:
 	/** Map collection of sprites with a string name */
@@ -64,5 +65,7 @@ private:
 	/** Map collection of textures with a strin name */
 	std::map<std::string, GLuint> m_textureMap;
 
+	/** Map collection of cubemap texture */
+	std::map<std::string, GLuint> m_cubemapTextureMap;
 };
 

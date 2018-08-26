@@ -100,6 +100,9 @@
     <Filter Include="Framework\CubeMap">
       <UniqueIdentifier>{7c8ee095-959f-43d3-87de-92c0cbaa877c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\Mesh\CubemapMesh">
+      <UniqueIdentifier>{fb747a32-6e43-4270-82aa-b799d7c1ebd8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Engine\Commenting Header.txt">
@@ -179,6 +182,9 @@
     <ClInclude Include="Engine\CubeMap.h">
       <Filter>Framework\CubeMap</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\CubemapMesh.h">
+      <Filter>Framework\Mesh\CubemapMesh</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Camera.cpp">
@@ -246,6 +252,9 @@
     </ClCompile>
     <ClCompile Include="Engine\CubeMap.cpp">
       <Filter>Framework\CubeMap</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\CubemapMesh.cpp">
+      <Filter>Framework\Mesh\CubemapMesh</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

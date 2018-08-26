@@ -26,6 +26,7 @@
     <ClInclude Include="Engine\Camera.h" />
     <ClInclude Include="Engine\Component.h" />
     <ClInclude Include="Engine\CubeMap.h" />
+    <ClInclude Include="Engine\CubemapMesh.h" />
     <ClInclude Include="Engine\CubeMesh.h" />
     <ClInclude Include="Engine\Debug.h" />
     <ClInclude Include="Engine\GameObject.h" />
@@ -52,6 +53,7 @@
     <ClCompile Include="Engine\Camera.cpp" />
     <ClCompile Include="Engine\Component.cpp" />
     <ClCompile Include="Engine\CubeMap.cpp" />
+    <ClCompile Include="Engine\CubemapMesh.cpp" />
     <ClCompile Include="Engine\CubeMesh.cpp" />
     <ClCompile Include="Engine\Debug.cpp" />
     <ClCompile Include="Engine\GameObject.cpp" />
